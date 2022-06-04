@@ -1,0 +1,5 @@
+Flask
+pick
+requests
+youtube-search-python
+yt_dlp
