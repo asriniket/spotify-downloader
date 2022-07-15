@@ -4,7 +4,7 @@ Spotify Downloader allows you to download albums and playlists off of Spotify.
 
 # Features
 
-- Easy to use, console-based application
+- Easy to use CLI application.
 - Supports downloading both user-generated playlists and public playlists
 - Uses [yt-dlp](https://github.com/yt-dlp/yt-dlp)
   alongside [youtube-search-python](https://github.com/alexmercerind/youtube-search-python) to accurately download audio
@@ -34,8 +34,8 @@ Spotify Downloader allows you to download albums and playlists off of Spotify.
 Instructions on how to get a Spotify client ID and secret can be
 found [here](https://developer.spotify.com/documentation/general/guides/authorization/app-settings/).
 
-`Application name` and `Application description` fields can be anything you choose, but the `Redirect URIs` field **
-must** contain `http://localhost:8080/` in order for the application to function.
+`Application name` and `Application description` fields can be anything you choose, but the `Redirect URIs` field
+**must** contain `http://localhost:8080/` in order for the application to function.
 
 # Usage
 
