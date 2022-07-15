@@ -1,18 +1,23 @@
+import os
+import shutil
+
 from pick import pick
 
-import album
-import authentication
-import playlist
-import utils
+from spotify_downloader import authentication, album, utils, playlist
+
+
+def cleanup():  # Delete the .tmp folder if it exists
+    if os.path.exists('.tmp/'):
+        shutil.rmtree('.tmp/')
 
 
 def main():
+    cleanup()
     access_token = authentication.authenticate_user()
     headers = {'Authorization': f'Bearer {access_token}'}
 
     prompt = 'Would you like to download an album or a playlist? Press Enter to confirm the selection.'
-    selection = pick(['Album', 'Playlist'], prompt)[0]
-
+    selection = pick(['Album', 'Playlist'], prompt)[0][0]
     if selection == 'Album':
         album_str = str(input('Please enter the name of the album or the Spotify URL of the album.\n'))
         album_id = utils.get_album_id(album_str, headers)
@@ -42,6 +47,7 @@ def main():
                 print()
                 print(playlist_)
                 playlist_.download_tracks()
+    cleanup()
 
 
 if __name__ == "__main__":

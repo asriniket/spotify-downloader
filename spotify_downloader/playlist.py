@@ -3,7 +3,7 @@ import shutil
 
 import requests
 
-from track import Track
+from .track import Track
 
 
 class Playlist:
@@ -65,12 +65,12 @@ class Playlist:
 
     def download_tracks(self):
         self._get_tracks()
-        if not os.path.exists('../.tmp'):
-            os.mkdir('../.tmp')
+        if not os.path.exists('.tmp'):
+            os.mkdir('.tmp')
         print(f'Downloading tracks in: "{self.name}"')
         for track in self.track_list:
             track.download('mp3', self.name)  # self.name refers to the playlist's name
-        shutil.rmtree('../.tmp')
+        shutil.rmtree('.tmp')
         print(f'Playlist "{self.name}" download complete')
 
     def __str__(self):

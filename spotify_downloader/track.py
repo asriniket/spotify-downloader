@@ -1,7 +1,6 @@
 import os
 
-import downloader
-import ffmpeg
+from . import downloader, ffmpeg
 
 
 class Track:
@@ -20,9 +19,9 @@ class Track:
         self.filename = ''.join(char for char in self.name if char.isalnum())
 
     def download(self, file_format, output_folder):
-        if not os.path.exists(f'../{output_folder}'):
-            os.mkdir(f'../{output_folder}')
-        downloader.download_audio(self.album_artist, self.name, output_folder, self.filename, file_format)
+        if not os.path.exists(f'{output_folder}'):
+            os.mkdir(f'{output_folder}')
+        downloader.download_audio(self.album_artist, self.name, self.album, output_folder, self.filename, file_format)
         downloader.download_cover_art(self.filename, self.cover_art)
         metadata = {
             'title': self.name,

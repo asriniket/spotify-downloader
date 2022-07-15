@@ -26,7 +26,7 @@ def _index():
 
 def _create_secrets():
     # Create a secrets.json file to store the Spotify client_id and client_secret
-    with open('../secrets.json', 'w') as file:
+    with open('secrets.json', 'w') as file:
         data = {
             'client_id': '',
             'client_secret': '',
@@ -39,7 +39,7 @@ def _create_secrets():
 
 def _read_secrets():
     # Read from the secrets.json
-    with open('../secrets.json', 'r') as file:
+    with open('secrets.json', 'r') as file:
         data = json.load(file)
         return data
 
@@ -87,7 +87,7 @@ def _initial_auth(code):
 
     data = requests.post('https://accounts.spotify.com/api/token', data=access_token_payload, headers=headers).json()
 
-    with open('../authentication.json', 'w') as file:
+    with open('authentication.json', 'w') as file:
         json.dump(data, file)
 
     print('Authentication successful. Restart the program to unlock full functionality.')
@@ -95,7 +95,7 @@ def _initial_auth(code):
 
 def _refresh_access_token():
     # Using the refresh token found in the authentication.json file, request a new Spotify access token
-    with open('../authentication.json', 'r') as file:
+    with open('authentication.json', 'r') as file:
         data = json.load(file)
         refresh_token = data['refresh_token']
 
@@ -119,15 +119,15 @@ def _refresh_access_token():
     data = requests.post('https://accounts.spotify.com/api/token', data=access_token_payload, headers=headers).json()
     data['refresh_token'] = refresh_token
 
-    with open('../authentication.json', 'w') as file:
+    with open('authentication.json', 'w') as file:
         json.dump(data, file)
         return data['access_token']
 
 
 def authenticate_user():
-    if not os.path.exists('../secrets.json'):
+    if not os.path.exists('secrets.json'):
         _create_secrets()
-    if not os.path.exists('../authentication.json'):  # Create a webserver to handle Spotify Authorization Code Flow
+    if not os.path.exists('authentication.json'):  # Create a webserver to handle Spotify Authorization Code Flow
         _initialize_webserver()
     else:  # Open the created authentication.json file and request a new access token using the refresh token
         return _refresh_access_token()

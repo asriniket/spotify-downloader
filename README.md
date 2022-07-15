@@ -43,4 +43,8 @@ When all the necessary prerequisites are installed, simply run the `spotify_down
 songs.
 
 The first time the program runs, you will be required to authorize the program to access your playlist information.
-After authorizing the application, you will be able to see your playlists available for download. 
+After authorizing the application, you will be able to see your playlists available for download.
+
+**Note:** If you are getting the error `Redirection is not supported` when running the program, try re-running the
+program on a terminal, or if you are using PyCharm, edit the launch configuration of the program and enable the
+setting: `Emulate terminal in output console`.

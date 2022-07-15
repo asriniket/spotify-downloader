@@ -3,7 +3,7 @@ import shutil
 
 import requests
 
-from track import Track
+from .track import Track
 
 
 def _get_genre(headers, genre_seeds, album_artist_id):
@@ -48,18 +48,17 @@ class Album:
             artists = [artist['name'] for artist in track['artists']]
             disc_number = track['disc_number']
             track_number = track['track_number']
-            self.track_list.append(
-                Track(name, artists, self.name, self.release_date, disc_number,
-                      track_number, self.num_tracks, self.genre, self.cover_art))
+            self.track_list.append(Track(name, artists, self.name, self.release_date, disc_number,
+                                         track_number, self.num_tracks, self.genre, self.cover_art))
 
     def download_tracks(self):
         self._get_tracks()
-        if not os.path.exists('../.tmp'):
-            os.mkdir('../.tmp')
+        if not os.path.exists('.tmp'):
+            os.mkdir('.tmp')
         print(f'Downloading tracks in: "{self.name}"')
         for track in self.track_list:
             track.download('mp3', self.name)  # self.name refers to the album's name
-        shutil.rmtree('../.tmp')
+        shutil.rmtree('.tmp')
         print(f'Album "{self.name}" download complete')
         pass
 
